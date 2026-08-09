@@ -8,9 +8,9 @@ import { useAppNavigation } from "@/lib/navigation";
 import { supabase } from "@/lib/supabase";
 import QuickAddDialog from "@/components/transactions/QuickAddDialog.vue";
 import LanguageSwitcher from "@/components/LanguageSwitcher.vue";
+import ThemeSwitcher from "@/components/ThemeSwitcher.vue";
 import PWAInstallPrompt from "@/components/ui/PWAInstallPrompt.vue";
 import { useNetworkStatus } from "@/composables/useNetworkStatus";
-import { useThemeMode } from "@/composables/useThemeMode";
 
 const { t, te } = useI18n();
 const route = useRoute();
@@ -22,7 +22,6 @@ const isHovering = ref(false);
 const showQuickAdd = ref(false);
 const { goBack } = useAppNavigation();
 const { isOnline } = useNetworkStatus();
-const { mode, toggleMode } = useThemeMode();
 
 const pageTitle = computed(() => {
   const key = route.meta.titleKey as string | undefined;
@@ -256,26 +255,7 @@ async function logout() {
       pageTitle
     }}</VAppBarTitle>
     <template #append>
-      <VBtn
-        icon
-        variant="text"
-        size="small"
-        class="mr-2"
-        :aria-label="`theme (${mode})`"
-        :title="$t('common.theme.title', { mode: $t(`common.theme.${mode}`) })"
-        @click="toggleMode"
-      >
-        <VIcon
-          :icon="
-            mode === 'dark'
-              ? 'mdi-weather-night'
-              : mode === 'light'
-                ? 'mdi-weather-sunny'
-                : 'mdi-desktop-tower-monitor'
-          "
-          size="20"
-        />
-      </VBtn>
+      <ThemeSwitcher class="mr-2" />
       <LanguageSwitcher class="mr-1" />
       <VBtn
         color="primary"

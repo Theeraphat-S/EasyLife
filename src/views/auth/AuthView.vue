@@ -5,6 +5,7 @@ import { useRoute, useRouter } from "vue-router";
 import { z } from "zod";
 
 import LanguageSwitcher from "@/components/LanguageSwitcher.vue";
+import ThemeSwitcher from "@/components/ThemeSwitcher.vue";
 import { useAppNavigation } from "@/lib/navigation";
 import { supabase } from "@/lib/supabase";
 import type { FieldErrors } from "@/types/finance";
@@ -162,7 +163,8 @@ async function submit() {
   <main
     class="auth-gradient auth-page d-flex align-center justify-center pa-4 pa-md-8"
   >
-    <div class="auth-lang-switcher">
+    <div class="auth-header-actions d-flex align-center ga-1">
+      <ThemeSwitcher />
       <LanguageSwitcher />
     </div>
     <div class="auth-grid w-100">
@@ -310,7 +312,7 @@ async function submit() {
   position: relative;
   min-height: 100vh;
 }
-.auth-lang-switcher {
+.auth-header-actions {
   position: absolute;
   top: 16px;
   right: 16px;
